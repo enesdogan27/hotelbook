@@ -20,7 +20,7 @@ import com.ed.hotelbook.model.CustomerRepository;
 
 @RestController
 @RequestMapping("api/customer")
-class CustomerRestController {
+public class CustomerRestController {
 
 	CustomerRepository customerRepository;
 	Logger LOG = LoggerFactory.getLogger(CustomerRestController.class);
@@ -30,22 +30,15 @@ class CustomerRestController {
 	}
 
 	@GetMapping
-	public List<Customer> getCustomers(
-			@RequestParam(name = "customerName", required = false, defaultValue = "")
-			Optional<String> customerName) {
-		
+	public List<Customer> getCustomers() {
+
 		return customerRepository.findAll();
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Customer> getCustomer(
-			@PathVariable("id") Optional<Customer> customer) {
-		if (!customer.isPresent()) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-
-		return new ResponseEntity<>(customer.get(), HttpStatus.OK);
-	}
+	public Optional<Customer> getCustomer(@PathVariable("id") long id) {
+		return customerRepository.findById(id);
+				}
 
 	@PostMapping
 	public Customer addCustomer(@RequestBody Customer customer) {
