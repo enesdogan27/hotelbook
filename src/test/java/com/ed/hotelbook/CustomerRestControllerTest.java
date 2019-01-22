@@ -25,6 +25,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import com.ed.hotelbook.controller.CustomerRestController;
 import com.ed.hotelbook.model.Customer;
 import com.ed.hotelbook.model.CustomerRepository;
+import com.ed.hotelbook.service.CustomerService;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(CustomerRestController.class)
@@ -34,7 +35,7 @@ public class CustomerRestControllerTest {
 	private MockMvc mvc;
 
 	@MockBean
-	private CustomerRepository customerRepository;
+	private CustomerService customerService;
 	List<Customer> customerList;
 
 	@Before
@@ -51,7 +52,7 @@ public class CustomerRestControllerTest {
 
 	@Test
 	public void getAllCustomers() throws Exception {
-		when(customerRepository.findAll()).thenReturn(customerList);
+		when(customerService.findAll()).thenReturn(customerList);
 
 		mvc.perform(get("/api/customer").contentType(APPLICATION_JSON))
 				.andExpect(status().isOk())
@@ -63,7 +64,7 @@ public class CustomerRestControllerTest {
 		Customer customer = Customer.builder().id(1).customerID("100")
 				.customerName("Batman").build();
 
-		when(customerRepository.findById(Long.valueOf(1)))
+		when(customerService.findByCustomerId("1"))
 				.thenReturn(Optional.of(customer));
 
 //		MvcResult result = 
