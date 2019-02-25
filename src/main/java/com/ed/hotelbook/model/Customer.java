@@ -25,7 +25,6 @@ public class Customer {
 	@GeneratedValue
 	private long customerId;
 
-	@Builder.Default
 	private String customerName;
 
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)

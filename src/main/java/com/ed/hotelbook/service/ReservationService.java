@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ed.hotelbook.config.CustomerNotFoundException;
-import com.ed.hotelbook.model.Customer;
 import com.ed.hotelbook.model.CustomerRepository;
 import com.ed.hotelbook.model.Reservation;
 import com.ed.hotelbook.model.ReservationRepository;
