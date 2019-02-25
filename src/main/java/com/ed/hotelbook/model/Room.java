@@ -1,8 +1,14 @@
 package com.ed.hotelbook.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,17 +20,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, 
+property = "roomId")
 public class Room {
 
 	@Id
 	@GeneratedValue
-	long roomId;
+	private long roomId;
 
-	String roomNumber;
+	private String roomNumber;
 
-	RoomType roomType;
+	private RoomType roomType;
 
-	RoomStatus roomStatus;
+	private RoomStatus roomStatus;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "reservation_reservationId")
+	private Reservation reservation;
 
 	public enum RoomStatus {
 		Vacant, Occuppied

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ed.hotelbook.model.Room;
 import com.ed.hotelbook.service.RoomService;
 
-@RestController("/api/room/")
+@RestController("/api/room")
 public class RoomRestController {
 
 	@Autowired

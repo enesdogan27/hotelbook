@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ed.hotelbook.config.Views;
 import com.ed.hotelbook.model.Reservation;
 import com.ed.hotelbook.service.ReservationService;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @RestController
 @RequestMapping(path = "/api/reservation")
@@ -36,12 +38,12 @@ public class ReservationRestController {
 	}
 
 	@GetMapping("/{id}")
-	public Optional<Reservation> getReservation(@PathVariable long reservationId) {
+	public Optional<Reservation> getReservation(@PathVariable Long reservationId) {
 		return reservationService.findById(reservationId);
 	}
 
 	@PostMapping
-	public Reservation postReservation(@Param("customerId") @NonNull long customerId,
+	public Reservation postReservation(@Param("customerId") @NonNull Long customerId,
 			@RequestBody Reservation reservation) {
 		return reservationService.saveReservation(reservation, customerId);
 	}
